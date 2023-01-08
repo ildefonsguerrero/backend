@@ -1,39 +1,44 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
-import { getUrlParameter } from './funciones.js';
-import { varios } from './database.js';
+import { getUrlParameter } from "./funciones.js";
+import { varios } from "./database.js";
 
 const sendMail = (req, res) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: varios.dir,
+      pass: varios.psw,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
 
-    let adr = getUrlParameter('adr',req.url);
+  var html = `<html>
+    <h3> Correu </h3>
+    <p> ${req.body["email"]} </p>
+    <h3> Telèfon </h3>
+    <p> ${req.body["telef"]} </p>
+    <h3> Missatge </h3>
+    <p> ${req.body["mensaje"]} </p>
+    </html>`;
 
-    if (adr !== false && adr !== null) {
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-            user: varios.dir,
-            pass: varios.psw
-            },
-            tls: {
-                rejectUnauthorized: false
-            }
-        });
-        
-        let mailOptions = {
-            from: varios.dir,
-            to: adr,
-            subject: req.body['subject'],
-            html: req.body['html']
-        };
+  let mailOptions = {
+    from: varios.dir,
+    to: varios.emailto,
+    subject: req.body["nombre"],
+    html: html,
+  };
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                res.send(error.toString());
-            } else {
-                res.send('');
-            }
-        });
+  transporter.sendMail(mailOptions, function (error, info) {
+    console.log(error);
+    if (error) {
+      res.send(error.toString());
+    } else {
+      res.send("");
     }
-}
+  });
+};
 
 export default sendMail;
