@@ -32,7 +32,7 @@ const sendMail = (req, res) => {
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
-    console.log(error);
+    // console.log(error);
     if (error) {
       res.send(error.toString());
     } else {
