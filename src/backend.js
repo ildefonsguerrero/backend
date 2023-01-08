@@ -36,6 +36,13 @@ server.use(indexRoutes);
 // indicamos donde están los ficheros para poder ser usados en las páginas
 server.use(express.static(join(__dirname, "public")));
 
+// Control de cualquier otro sitio
+server.all("*", function (req, res) {
+  res.status(200);
+  res.send("OK");
+  return;
+});
+
 // Escuchamos por el puerto port
 server.listen(port, () => {
   console.log(`Listen on port ${port}`);
