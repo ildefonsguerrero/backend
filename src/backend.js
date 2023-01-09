@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 
+import { varios } from "./controllers/database.js";
+
 // Creamos servidor
 const server = express();
 
@@ -15,7 +17,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 import cors from "cors";
 const corsOptions = {
-  origin: "*",
+  // origin: varios.corsOptions,
+  origin: varios.allowedOrigins,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
