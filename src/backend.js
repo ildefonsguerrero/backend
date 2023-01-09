@@ -38,8 +38,7 @@ server.use(express.static(join(__dirname, "public")));
 
 // Control de cualquier otro sitio
 server.all("*", function (req, res) {
-  res.status(200);
-  res.send("OK");
+  res.sendStatus(200);
   return;
 });
 

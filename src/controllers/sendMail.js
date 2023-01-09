@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 
-import { getUrlParameter } from "./funciones.js";
 import { varios } from "./database.js";
 
 const sendMail = (req, res) => {
@@ -33,11 +32,7 @@ const sendMail = (req, res) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     // console.log(error);
-    if (error) {
-      res.send(error.toString());
-    } else {
-      res.send("");
-    }
+    res.sendStatus(200);
   });
 };
 
