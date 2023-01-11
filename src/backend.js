@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import { varios } from "./controllers/database.js";
 
@@ -15,11 +16,9 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-import cors from "cors";
 const corsOptions = {
-  // origin: varios.corsOptions,
   origin: varios.allowedOrigins,
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 
