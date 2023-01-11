@@ -3,6 +3,11 @@ import nodemailer from "nodemailer";
 import { varios } from "./database.js";
 
 const sendMail = (req, res) => {
+  if (req.headers["origin"] !== varios.origen) {
+    res.sendStatus(200);
+    return;
+  }
+
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
