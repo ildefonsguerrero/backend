@@ -15,7 +15,7 @@ const control = (req, res, next) => {
       res.send("Error parámetro no informado");
       return;
     } else {
-      if (acc !== varios.clau) {
+      if (acc !== varios.clau && acc !== varios.clau2) {
         res.send("Error parámetro erróneo");
         return;
       }
